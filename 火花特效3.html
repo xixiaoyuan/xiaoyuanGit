@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      height: fit-content;
+      background-color: #000;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+    }
+
+    /* 设置图片样式 */
+    .image {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* 设置火花特效样式 */
+    .sparkle {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: #f00;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkleAnimation 1s infinite;
+    }
+
+    /* 定义火花特效动画 */
+    @keyframes sparkleAnimation {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    .image:nth-child(1) {
+      z-index: 4;
+    }
+
+    .image:nth-child(2) {
+      z-index: 3;
+    }
+
+    .image:nth-child(3) {
+      z-index: 2;
+    }
+
+    .image:nth-child(4) {
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="image" src="./照片/1.jpg" alt="Image 1">
+    <img class="image" src="./照片/2.jpg" alt="Image 2">
+    <img class="image" src="./照片/1.jpg" alt="Image 3">
+    <img class="image" src="./照片/4.jpg" alt="Image 3">
+    <!-- 添加更多图片 -->
+  </div>
+
+  <script src="./js/105_vector.js"></script>
+  <script src="./js/105_fireworks.js"></script>
+  <script>
+    var audio = new Audio("../html文本2/歌曲/如果的事.MP3"); // 替换为您的音乐文件路径
+    window.addEventListener("DOMContentLoaded", function () {
+      audio.play(); // 页面加载完成后自动播放音乐
+    });
+
+    // 获取容器元素
+    const container = document.querySelector('.container');
+
+    // 获取所有图片元素
+    const images = document.querySelectorAll('.image');
+
+    // 定义变量用于存储当前显示的图片索引
+    let currentIndex = 0;
+
+    // 定义变量用于存储循环播放的定时器
+    let intervalId = null;
+
+    // 初始化第一张图片的显示
+    images[currentIndex].style.opacity = '1';
+
+    // 点击容器时触发火花特效和图片逐渐消失再逐渐显现
+    container.addEventListener('click', function (event) {
+      if (audio.paused) {
+        audio.play(); // 播放音乐
+      } else {
+        audio.pause(); // 停止音乐
+      }
+
+
+      // 获取点击位置的坐标
+      const x = event.clientX;
+      const y = event.clientY;
+
+      // 创建火花特效元素
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.top = y + 'px';
+      sparkle.style.left = x + 'px';
+
+      // 将火花特效元素添加到容器中
+      container.appendChild(sparkle);
+
+      // 设置定时器，在一段时间后移除火花特效元素
+      setTimeout(function () {
+        container.removeChild(sparkle);
+      }, 1000);
+
+      // 遍历所有图片元素，逐渐改变透明度
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      } else {
+        // 否则开始循环播放
+        intervalId = setInterval(function () {
+          // 隐藏当前显示的图片
+          images[currentIndex].style.opacity = '0';
+
+          // 更新索引，循环显示下一张图片
+          currentIndex = (currentIndex + 1) % images.length;
+
+          // 显示下一张图片
+          images[currentIndex].style.opacity = '1';
+        }, 1000);
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

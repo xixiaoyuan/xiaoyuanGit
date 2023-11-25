@@ -2,55 +2,8 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="./css/火花特效.css">
   <style>
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: fit-content;
-      height: fit-content;
-      background-color: #000;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-    }
-
-    /* 设置图片样式 */
-    .image {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    /* 设置火花特效样式 */
-    .sparkle {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      background-color: #f00;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkleAnimation 1s infinite;
-    }
-
-    /* 定义火花特效动画 */
-    @keyframes sparkleAnimation {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      100% {
-        transform: scale(2);
-        opacity: 0;
-      }
-    }
-
-
     .container {
       position: relative;
       width: 100%;
@@ -66,35 +19,18 @@
       transition: opacity 1s;
     }
 
-    .image:nth-child(1) {
-      z-index: 4;
-    }
-
-    .image:nth-child(2) {
-      z-index: 3;
-    }
-
-    .image:nth-child(3) {
-      z-index: 2;
-    }
-
-    .image:nth-child(4) {
-      z-index: 1;
-    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <img class="image" src="./照片/1.jpg" alt="Image 1">
-    <img class="image" src="./照片/2.jpg" alt="Image 2">
-    <img class="image" src="./照片/1.jpg" alt="Image 3">
-    <img class="image" src="./照片/4.jpg" alt="Image 3">
+    <img class="image" src="蓝天.jpg" alt="Image 1">
+    <img class="image" src="懒洋洋.png" alt="Image 2">
+    <img class="image" src="喜欢.jpg" alt="Image 3">
+    <img class="image" src="雨天.png" alt="Image 3">
     <!-- 添加更多图片 -->
   </div>
 
-  <script src="./js/105_vector.js"></script>
-  <script src="./js/105_fireworks.js"></script>
   <script>
     var audio = new Audio("../html文本2/歌曲/如果的事.MP3"); // 替换为您的音乐文件路径
     window.addEventListener("DOMContentLoaded", function () {
@@ -161,9 +97,7 @@
         }, 1000);
       }
     });
-
   </script>
-
 </body>
 
 </html>
